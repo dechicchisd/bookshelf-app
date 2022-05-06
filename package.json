@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2",
+    "koa": "^2.13.4",
+    "koa-ejs": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0"
+  },
+  "name": "bookshelf-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dechicchisd/bookshelf-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dechicchisd/bookshelf-app/issues"
+  },
+  "homepage": "https://github.com/dechicchisd/bookshelf-app#readme",
+  "description": ""
+}
