@@ -30,16 +30,16 @@ router.get('/', async ctx => {
     return ctx.render('index')
 })
 
-router.get('/db', async (req, res) => {
+router.get('/db', async ctx => {
     try {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM test_table');
         const results = { 'results': (result) ? result.rows : null };
-        res.render('pages/db', results);
+        ctx.render('pages/db', results);
         client.release();
     } catch (err) {
         console.error(err);
-        res.send("Error " + err);
+        ctx.body = "Error " + err;
     }
 })
 
