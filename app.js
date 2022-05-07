@@ -4,8 +4,9 @@ import render from 'koa-ejs'
 import { fileURLToPath } from 'url';
 import path from 'path';
 import serve from 'koa-static'
+import pg from 'pg'
 
-const { Pool } = require('pg');
+const { Pool } = pg
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
