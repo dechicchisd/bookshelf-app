@@ -35,7 +35,7 @@ router.get('/db', async ctx => {
         const client = await pool.connect();
         const result = await client.query('SELECT * FROM test_table');
         const results = { 'results': (result) ? result.rows : null };
-        ctx.render('pages/db', results);
+        ctx.body = JSON.stringify(results)
         client.release();
     } catch (err) {
         console.error(err);
