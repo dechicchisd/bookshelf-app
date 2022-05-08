@@ -36,9 +36,9 @@ router.post('/books', async ctx => {
     const author = ctx.request.body.author
     ctx.body = ctx.request.body
 
-    // const client = await pool.connect()
-    // const result = await client.query(`insert into Books (title, author) values ($1, $2)`, [title, author])
-    // ctx.body = 'You succesfully added a new book'
+    const client = await pool.connect()
+    const result = await client.query(`insert into Books (title, author) values ($1, $2)`, [title, author])
+    ctx.body = 'You succesfully added a new book'
 
 })
 
