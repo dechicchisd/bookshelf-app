@@ -32,12 +32,12 @@ router.get('/', async ctx => {
 })
 
 router.post('/books', async ctx => {
-    console.log(ctx.body)
-    const title = ctx.body.title
-    const author = ctx.body.author
+    const title = ctx.request.body.title
+    const author = ctx.request.body.author
 
     const client = await pool.connect()
     const result = await client.query(`INSERT INTO Books (title, author)`, [title, author])
+    console.log(result)
     ctx.body = 'You succesfully added a new book'
 
 })
