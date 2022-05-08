@@ -7,13 +7,27 @@ import path from 'path';
 import serve from 'koa-static'
 import pg from 'pg'
 
+
+
 const { Pool } = pg
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
+const url = process.env.DATABASE_URL
+let pool
+if (url == null || url == '') {
+    pool = new Pool({
+        host: 'localhost',
+        user: 'postgres',
+        port: 5432,
+        password: 'password'
     }
-});
+    )
+} else {
+    pool = new Pool({
+        connectionString: url,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +42,9 @@ render(app, {
 })
 
 router.get('/', async ctx => {
-    return ctx.render('index')
+    await ctx.render('index', {
+        title: 'Books',
+    })
 })
 
 router.post('/books', async ctx => {
