@@ -1,5 +1,6 @@
 import Koa from 'koa'
 import Router from 'koa-router'
+import koaBody from 'koa-body'
 import render from 'koa-ejs'
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -30,6 +31,17 @@ router.get('/', async ctx => {
     return ctx.render('index')
 })
 
+router.post('/books', async ctx => {
+    const name = ctx.body.title
+    const author = ctx.body.author
+
+    const client = await pool.connect()
+    const result = await client.query(`INSERT INTO Books (title, author)`, [nome, author])
+    console.log(result)
+    ctx.body = 'You succesfully added a new book'
+
+})
+
 router.get('/db', async ctx => {
     try {
         const client = await pool.connect();
@@ -43,10 +55,11 @@ router.get('/db', async ctx => {
     }
 })
 
-app.use(router.routes())
+app.use(koaBody()).use(router.routes())
 
 let port = process.env.PORT
 if (port == null || port == '') port = 3000
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`)
+    console.log('http://localhost:3000')
 })
