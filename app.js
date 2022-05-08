@@ -7,8 +7,6 @@ import path from 'path';
 import serve from 'koa-static'
 import pg from 'pg'
 
-
-
 const { Pool } = pg
 const url = process.env.DATABASE_URL
 let pool
@@ -42,8 +40,12 @@ render(app, {
 })
 
 router.get('/', async ctx => {
+    const client = await pool.connect()
+    const result = await client.query('select * from books')
+    console.log(result.rows)
     await ctx.render('index', {
         title: 'Books',
+        books: result.rows
     })
 })
 

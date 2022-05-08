@@ -18,5 +18,13 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+
+    <ul>
+        <% books.forEach(book => { %>
+        <li>
+            <%= book.title%>
+        </li>
+        <% }) %>
+    </ul>
 </body>
 </html>
