@@ -10,7 +10,7 @@ export const getRouter = () => {
   router.get('/', async (ctx) => {
     const client = await pool.connect()
     const result = await client.query('select * from books')
-    console.log(result.rows)
+    // console.log(result.rows)
     await ctx.render('index', {
       title: 'Books',
       books: result.rows,
