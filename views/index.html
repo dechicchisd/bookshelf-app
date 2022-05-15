@@ -24,11 +24,15 @@
         </div>
       </form>
     </div>
-
-    <ul>
-      <% books.forEach(book => { %>
-      <li><%= book.title%></li>
-      <% }) %>
-    </ul>
+    <div id="list-container">
+      <ul>
+        <% books.forEach(book => { %>
+        <li>
+          <div id="book"><%= book.title%></div>
+          <button>Delete</button>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
   </body>
 </html>
