@@ -1,4 +1,4 @@
-import { Pool, Client } from 'pg'
+import pg from 'pg'
 
 const config = {
   host: 'localhost',
@@ -8,18 +8,27 @@ const config = {
   database: 'postgres',
 }
 
-export const getDbConnection = () => {
+export const getDbConnection = async () => {
+  const { Client } = pg
   const url = process.env.DATABASE_URL
-  let pool
+  let client
   if (url == null || url == '') {
-    pool = new Pool(config)
+    client = new Client(config)
   } else {
-    pool = new Pool({
+    client = new Client({
       connectionString: url,
       ssl: {
         rejectUnauthorized: false,
       },
     })
   }
-  return pool
+  console.log('dvdfvdf\n\n\n')
+  await client.connect()
+  await client.query(`
+    CREATE TABLE IF NOT EXISTS "Books" (
+	    "id" SERIAL NOT NULL PRIMARY KEY,
+	    "author" VARCHAR(50) NOT NULL,
+	    "title" VARCHAR(50) NOT NULL,
+    );`)
+  return client
 }

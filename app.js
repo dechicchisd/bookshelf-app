@@ -5,6 +5,9 @@ import { fileURLToPath } from 'url'
 import path from 'path'
 import serve from 'koa-static'
 import { getRouter } from './server/routers/router.js'
+import { getDbConnection } from './server/db/connection.js'
+
+export const client = getDbConnection()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
