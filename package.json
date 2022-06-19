@@ -8,7 +8,8 @@
     "koa-json": "^2.0.2",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "pgtools": "^0.3.2"
   },
   "name": "bookshelf-app",
   "version": "1.0.0",

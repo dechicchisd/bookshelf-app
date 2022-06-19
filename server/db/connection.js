@@ -1,16 +1,18 @@
-import pg from 'pg'
+import { Pool, Client } from 'pg'
+
+const config = {
+  host: 'localhost',
+  user: 'postgres',
+  port: 5432,
+  password: 'password',
+  database: 'postgres',
+}
 
 export const getDbConnection = () => {
-  const { Pool } = pg
   const url = process.env.DATABASE_URL
   let pool
   if (url == null || url == '') {
-    pool = new Pool({
-      host: 'localhost',
-      user: 'postgres',
-      port: 5432,
-      password: 'password',
-    })
+    pool = new Pool(config)
   } else {
     pool = new Pool({
       connectionString: url,
