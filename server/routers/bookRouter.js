@@ -1,16 +1,13 @@
 import Router from 'koa-router'
-import { getDbConnection } from '../db/connection.js'
+import { client } from '../../app.js'
 
 export const getBooksRouter = () => {
   const router = new Router()
-
-  const pool = getDbConnection()
   router.post('/books', async (ctx) => {
     const title = ctx.request.body.title
     const author = ctx.request.body.author
     ctx.body = ctx.request.body
 
-    const client = await pool.connect()
     const result = await client.query(
       `insert into Books (title, author) values ($1, $2)`,
       [title, author]

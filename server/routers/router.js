@@ -1,12 +1,9 @@
 import Router from 'koa-router'
 import { getBooksRouter } from './bookRouter.js'
-import { getDbConnection } from '../db/connection.js'
 import { client } from '../../app.js'
 
 export const getRouter = () => {
   const router = new Router()
-
-  const pool = getDbConnection()
 
   router.get('/', async (ctx) => {
     const result = await client.query('select * from books')

@@ -22,13 +22,17 @@ export const getDbConnection = async () => {
       },
     })
   }
+  try {
+    await client.connect()
+  } catch (e) {
+    console.log('ERRORE', e)
+  }
   console.log('dvdfvdf\n\n\n')
-  await client.connect()
-  await client.query(`
-    CREATE TABLE IF NOT EXISTS "Books" (
-	    "id" SERIAL NOT NULL PRIMARY KEY,
-	    "author" VARCHAR(50) NOT NULL,
-	    "title" VARCHAR(50) NOT NULL,
-    );`)
+  // await client.query(`
+  //   CREATE TABLE IF NOT EXISTS "Books" (
+  //     "id" SERIAL NOT NULL PRIMARY KEY,
+  //     "author" VARCHAR(50) NOT NULL,
+  //     "title" VARCHAR(50) NOT NULL,
+  //   );`)
   return client
 }
